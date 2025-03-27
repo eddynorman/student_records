@@ -68,9 +68,9 @@ class Subject(models.Model):
     def __str__(self):
         return f"{self.code} - {self.name}"
     
-class StudentCourse(models.Model):
+class StudentSubject(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="courses")
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="students")
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="students")
     
     class Meta:
-        unique_together = ("student", "course")  
+        unique_together = ("student", "subject")  
