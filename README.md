@@ -90,9 +90,6 @@ To deploy the API on **AWS**, follow these steps:
 5. Set up a domain or public IP for API access.
 
 ## Backup Strategies
-```markdown
-## 🛡️ Backup Schemes Explained
-
 In server administration and system maintenance, backups are crucial for disaster recovery, data integrity, and business continuity. Below are three primary types of backup strategies used in real-world scenarios:
 
 ---
