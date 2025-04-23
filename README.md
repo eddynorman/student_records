@@ -236,12 +236,7 @@ sudo apt update
 sudo apt install curl gzip tar nginx
 ```
 
-If you're backing up a PostgreSQL or MySQL database, install:
-
-- For PostgreSQL:
-  ```bash
-  sudo apt install postgresql-client
-  ```
+If you're backing MySQL database, install:
 - For MySQL:
   ```bash
   sudo apt install mysql-client
@@ -257,9 +252,9 @@ sudo touch /var/log/server_health.log /var/log/backup.log /var/log/update.log
 5. **Test each script manually:**
 
 ```bash
-./health_check.sh
-./backup_api.sh
-./update_server.sh
+sudo ./health_check.sh
+sudo ./backup_api.sh
+sudo ./update_server.sh
 ```
 
 ---
@@ -267,9 +262,9 @@ sudo touch /var/log/server_health.log /var/log/backup.log /var/log/update.log
 ### ⏰ Cron Job Scheduling
 
 To schedule the scripts automatically, open crontab with:
-
+we use sudo to run the crontab command as the root user. This allows also access to write to the log files.
 ```bash
-crontab -e
+sudo crontab -e
 ```
 
 Then add the following lines:
