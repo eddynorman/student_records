@@ -37,7 +37,7 @@ else
 fi
 
 # API ENDPOINT CHECKS
-API_BASE="http://localhost:8000/api"
+API_BASE="http://51.20.2.101/api" # Replace with your API base URL
 
 for endpoint in "students" "subjects"
 do
