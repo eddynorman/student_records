@@ -1,0 +1,48 @@
+services:
+  db:
+    image: mysql:8
+    container_name: student_records-db-1
+    restart: always
+    environment:
+      MYSQL_DATABASE: student_records
+      MYSQL_ROOT_PASSWORD: emperor666
+      MYSQL_USER: student_user
+      MYSQL_PASSWORD: studentpass
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - student_network
+
+  web:
+    build: .
+    container_name: student_records-web-1
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DB_NAME=student_records
+      - DB_USER=student_user
+      - DB_PASSWORD=studentpass
+      - DB_HOST=db
+      - DB_PORT=3306
+    networks:
+      - student_network
+    
+
+volumes:
+  mysql_data:
+
+networks:
+  student_network:
