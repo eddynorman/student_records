@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-qxg4^&on5m$wn+^pqae8h(xk86gcm7sttymtzc-&sk1oqd6*-%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -82,13 +82,21 @@ WSGI_APPLICATION = "studentrecords.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        'ENGINE': 'django.db.backends.mysql',  # Use 'postgresql', 'sqlite3', or 'oracle' if needed
-        'NAME': 'student_records',
-        'USER': 'emperor',
-        'PASSWORD': 'Ed666*zub',
-        'HOST': 'localhost',  # Set to your database host
-        'PORT': '3306',
+    # "default": {
+    #     'ENGINE': 'django.db.backends.mysql',  # Use 'postgresql', 'sqlite3', or 'oracle' if needed
+    #     'NAME': 'student_records',
+    #     'USER': 'emperor',
+    #     'PASSWORD': 'Ed666*zub',
+    #     'HOST': 'localhost',  # Set to your database host
+    #     'PORT': '3306',
+    # },
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
     }
 }
 
